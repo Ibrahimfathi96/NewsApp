@@ -1,0 +1,13 @@
+{
+  "app_title": "News App",
+  "drawer_title": "News App !",
+  "sports": "Sports",
+  "politics": "Politics",
+  "business": "Business",
+  "health": "Health",
+  "science": "Science",
+  "environment": "Environment",
+  "categories": "Categories",
+  "lang": "Language",
+  "pick_cat": "Pick News Category of your interest"
+}
