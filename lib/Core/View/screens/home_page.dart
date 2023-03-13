@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:news/Core/View/custom_widgets/category_list_widget.dart';
+import 'package:news/Core/View/custom_widgets/lang_bottom_sheet.dart';
+import 'package:news/Core/View/models/category_model.dart';
+import 'package:news/Core/style/theme.dart';
 import 'package:news/Providers/lang_provider.dart';
-import 'package:news/UI/style/custom_widgets/grid_view_list.dart';
-import 'package:news/UI/style/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../models/category_model.dart';
-import '../style/custom_widgets/lang_bottom_sheet.dart';
-import 'category_screen.dart';
+import '../custom_widgets/category_widget.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = 'home-page';
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
           categoryBackGroundColor: const Color.fromARGB(255, 0, 62, 144),
           categoryID: 'general',
           categoryImage: 'assets/images/Politics.png',
-          categoryTitle: AppLocalizations.of(context)!.politics),
+          categoryTitle: AppLocalizations.of(context)!.general),
       CategoryMD(
           categoryBackGroundColor: const Color.fromARGB(255, 237, 30, 121),
           categoryID: 'health',
@@ -45,9 +45,9 @@ class _HomePageState extends State<HomePage> {
           categoryTitle: AppLocalizations.of(context)!.business),
       CategoryMD(
           categoryBackGroundColor: const Color.fromARGB(255, 72, 130, 207),
-          categoryID: 'Environment',
+          categoryID: 'technology',
           categoryImage: 'assets/images/environment.png',
-          categoryTitle: AppLocalizations.of(context)!.environment),
+          categoryTitle: AppLocalizations.of(context)!.technology),
       CategoryMD(
           categoryBackGroundColor: const Color.fromARGB(255, 242, 211, 82),
           categoryID: 'science',
@@ -202,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                               crossAxisSpacing: 8,
                               childAspectRatio: 6 / 7,
                               mainAxisSpacing: 8),
-                      itemBuilder: (context, index) => GridViewList(
+                      itemBuilder: (context, index) => CategoryListWidget(
                           categoryMD: categories[index],
                           index: index,
                           onCategoryClick: onCategoryClick),
@@ -211,7 +211,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-            ) : CategotyScreen(selectedCategory!),
+            ) : CategoryWidget(selectedCategory!),
         ),
       ],
     );

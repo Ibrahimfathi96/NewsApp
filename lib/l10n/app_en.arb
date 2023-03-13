@@ -2,11 +2,11 @@
   "app_title": "News App",
   "drawer_title": "News App !",
   "sports": "Sports",
-  "politics": "Politics",
+  "general": "General",
   "business": "Business",
   "health": "Health",
   "science": "Science",
-  "environment": "Environment",
+  "technology": "Technology",
   "categories": "Categories",
   "lang": "Language",
   "pick_cat": "Pick News Category of your interest"
