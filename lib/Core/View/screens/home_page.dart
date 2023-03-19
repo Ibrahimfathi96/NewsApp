@@ -7,6 +7,7 @@ import 'package:news/Providers/lang_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../custom_widgets/category_widget.dart';
+import '../custom_widgets//search_bar.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = 'home-page';
@@ -67,7 +68,17 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         Scaffold(
+          backgroundColor: Colors.transparent,
             appBar: AppBar(
+              actions:
+              [
+                if(selectedCategory != null) Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(
+                      onPressed: () => const SearchPage(),
+                      icon: const Icon(Icons.search_outlined,size: 28,)),
+                )
+              ],
               title: Text(
                 selectedCategory == null
                     ? AppLocalizations.of(context)!.app_title
