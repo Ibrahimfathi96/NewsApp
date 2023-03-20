@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news/Core/View/custom_widgets/news_details_screen.dart';
 import 'package:news/Core/View/screens/home_page.dart';
+import 'package:news/Core/View/screens/search_screen.dart';
 import 'package:news/Core/View/screens/settings_screen.dart';
 import 'package:news/Core/View/screens/splash_screen.dart';
 import 'package:news/Core/style/theme.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         HomePage.routeName : (_)=> HomePage(),
         SettingsScreen.routeName : (_)=> SettingsScreen(),
         NewsDetailsScreen.routeName : (_)=> NewsDetailsScreen(),
+        SearchPage.routeName : (_)=> SearchPage(),
       },
     );
   }

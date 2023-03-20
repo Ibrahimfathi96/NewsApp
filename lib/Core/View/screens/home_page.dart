@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:news/Core/View/custom_widgets/category_list_widget.dart';
 import 'package:news/Core/View/custom_widgets/lang_bottom_sheet.dart';
 import 'package:news/Core/View/models/category_model.dart';
+import 'package:news/Core/View/screens/search_screen.dart';
 import 'package:news/Core/style/theme.dart';
 import 'package:news/Providers/lang_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../custom_widgets/category_widget.dart';
-import '../custom_widgets//search_bar.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = 'home-page';
@@ -72,10 +72,13 @@ class _HomePageState extends State<HomePage> {
             appBar: AppBar(
               actions:
               [
-                if(selectedCategory != null) Padding(
+                if(selectedCategory != null)
+                  Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: IconButton(
-                      onPressed: () => const SearchPage(),
+                      onPressed: () {
+                        Navigator.pushNamed(context, SearchPage.routeName);
+                      },
                       icon: const Icon(Icons.search_outlined,size: 28,)),
                 )
               ],

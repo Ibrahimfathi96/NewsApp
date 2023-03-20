@@ -11,7 +11,7 @@ NewsList(this.source);
   Widget build(BuildContext context) {
     return Container(
       child: FutureBuilder<NewsResponse>(
-        future: APIManager.getNews(source.id ?? ''),
+        future: APIManager.getNews(sourceId:source.id ?? '',query:''),
         builder: (context, snapshot){
           if(snapshot.connectionState == ConnectionState.waiting){
             return const Center(child: CircularProgressIndicator(),);
