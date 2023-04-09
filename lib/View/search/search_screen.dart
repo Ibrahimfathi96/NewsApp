@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:news/Core/API/api_manager.dart';
 import 'package:news/Core/API/models/news.dart';
-import 'package:news/Core/View/custom_widgets/news_item.dart';
 import 'package:news/Core/style/theme.dart';
+import 'package:news/View/news/news_item.dart';
 
 class SearchPage extends StatefulWidget {
 static const String routeName = 'search-page';

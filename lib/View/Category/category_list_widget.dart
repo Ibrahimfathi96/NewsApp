@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news/Core/View/models/category_model.dart';
+import 'package:news/Core/model/category_model.dart';
 import 'package:news/Providers/lang_provider.dart';
 import 'package:provider/provider.dart';
 

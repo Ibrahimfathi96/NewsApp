@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:news/Core/API/api_manager.dart';
-import 'package:news/Core/API/models/SourcesResponse.dart';
-import 'package:news/Core/View/custom_widgets/category_tabs_widget.dart';
-import 'package:news/Core/View/models/category_model.dart';
+import 'package:news/Core/API/models/NewsResponse.dart';
+import 'package:news/Core/API/models/Sources.dart';
+import 'package:news/View/news/news_item.dart';
 
-class CategoryWidget extends StatelessWidget {
-  CategoryMD selectedCategory;
-  CategoryWidget(this.selectedCategory);
-
-
+class NewsList extends StatelessWidget {
+Source source;
+NewsList(this.source);
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: FutureBuilder<SourcesResponse>(
-        future: APIManager.getSources(selectedCategory.categoryID),
-        builder: (buildContext, snapshot){
+      child: FutureBuilder<NewsResponse>(
+        future: APIManager.getNews(sourceId:source.id ?? '',query:''),
+        builder: (context, snapshot){
           if(snapshot.connectionState == ConnectionState.waiting){
             return const Center(child: CircularProgressIndicator(),);
           }
@@ -28,10 +26,10 @@ class CategoryWidget extends StatelessWidget {
                   Text(
                       textAlign: TextAlign.center,
                       'Error Loading Data,Check Your Connection\n${snapshot.error.toString()}',
-                    style:Theme.of(context)
-                        .textTheme
-                        .headlineLarge!
-                        .copyWith(color: Colors.black87, fontWeight: FontWeight.w300)
+                      style:Theme.of(context)
+                          .textTheme
+                          .headlineLarge!
+                          .copyWith(color: Colors.black87, fontWeight: FontWeight.w300)
                   ),
                 ],
               ),
@@ -45,7 +43,9 @@ class CategoryWidget extends StatelessWidget {
                 const SizedBox(height: 20,),
                 Text(
                     textAlign: TextAlign.center,
-                    'Server Error Loading data${snapshot.data?.message}',
+                    'Server Error Loading data${
+                    snapshot.data?.message
+                    }',
                     style:Theme.of(context)
                         .textTheme
                         .headlineLarge!
@@ -54,15 +54,15 @@ class CategoryWidget extends StatelessWidget {
               ],
             ) ,);
           }
-          var sources = snapshot.data?.sources;
-          return CategoryTabsWidget(sources!);
-          //   ListView.builder(
-          //   itemBuilder: (context, index) => Text('${sources?[index].name}'),
-          //   itemCount: sources?.length ?? 0 ,
-          // );
+          var newsList = snapshot.data?.newsList;
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              return NewsItem(newsList![index]);
+            },
+            itemCount: newsList?.length ,
+          );
         },
       ),
-
     );
   }
 }
