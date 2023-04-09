@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:news/Core/API/api_manager.dart';
 import 'package:news/Core/API/models/news.dart';
-import 'package:news/Core/View/custom_widgets/news_item.dart';
 import 'package:news/Core/style/theme.dart';
+import 'package:news/View/news/news_item.dart';
 
 class SearchPage extends StatefulWidget {
 static const String routeName = 'search-page';
@@ -12,7 +12,7 @@ static const String routeName = 'search-page';
 }
 
 class _SearchPageState extends State<SearchPage> {
-String query = '';
+String? query = '';
 List<News> newsList= [];
 News? news;
 

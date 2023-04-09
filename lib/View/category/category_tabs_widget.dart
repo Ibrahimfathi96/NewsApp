@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:news/Core/API/models/Sources.dart';
-import 'package:news/Core/View/custom_widgets/news_list.dart';
-import 'package:news/Core/View/custom_widgets/source_tab_item.dart';
+import 'package:news/View/category/source_tab_item.dart';
+import 'package:news/View/news/news_list.dart';
 
 class CategoryTabsWidget extends StatefulWidget {
-  List<Source> sources;
+  List<Source> sources = [];
 
   CategoryTabsWidget(this.sources);
 
@@ -39,7 +39,6 @@ class _CategoryTabsWidgetState extends State<CategoryTabsWidget> {
             Expanded(child: NewsList(widget.sources[selectedIndex])),
           ],
         ),
-
       ),
     );
   }

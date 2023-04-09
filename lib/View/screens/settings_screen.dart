@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news/Core/View/screens/home_page.dart';
 import 'package:news/Core/style/theme.dart';
+import 'package:news/View/home/home_page.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const String routeName = 'settings-screen';

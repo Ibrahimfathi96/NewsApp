@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:news/Core/View/custom_widgets/category_list_widget.dart';
-import 'package:news/Core/View/custom_widgets/lang_bottom_sheet.dart';
-import 'package:news/Core/View/models/category_model.dart';
-import 'package:news/Core/View/screens/search_screen.dart';
+import 'package:news/Core/models/category_model.dart';
 import 'package:news/Core/style/theme.dart';
 import 'package:news/Providers/lang_provider.dart';
+import 'package:news/View/category/category_view.dart';
+import 'package:news/View/custom_widgets/lang_bottom_sheet.dart';
+import 'package:news/View/home/category_grid_view.dart';
+import 'package:news/View/screens/search_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../custom_widgets/category_widget.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = 'home-page';
@@ -135,32 +135,6 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(12.0),
-                  //   child: InkWell(
-                  //     onTap: (){
-                  //       Navigator.pushReplacementNamed(context, SettingsScreen.routeName);
-                  //     },
-                  //     child: Row(
-                  //       children: [
-                  //         const Icon(
-                  //           Icons.settings,
-                  //           size: 40,
-                  //         ),
-                  //         const SizedBox(
-                  //           width: 12,
-                  //         ),
-                  //         Text(
-                  //           'Settings',
-                  //           style: Theme.of(context)
-                  //               .textTheme
-                  //               .headlineLarge!
-                  //               .copyWith(color: Colors.black),
-                  //         )
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: InkWell(
@@ -225,7 +199,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-            ) : CategoryWidget(selectedCategory!),
+            ) : CategoryNewsList(selectedCategory!),
         ),
       ],
     );
