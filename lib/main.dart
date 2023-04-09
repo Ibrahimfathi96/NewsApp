@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:news/Core/View/custom_widgets/news_details_screen.dart';
 import 'package:news/Core/View/screens/home_page.dart';
+import 'package:news/Core/View/screens/search_screen.dart';
 import 'package:news/Core/View/screens/settings_screen.dart';
 import 'package:news/Core/View/screens/splash_screen.dart';
 import 'package:news/Core/style/theme.dart';
 import 'package:news/Providers/lang_provider.dart';
-
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -40,6 +41,8 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName : (_)=> SplashScreen(),
         HomePage.routeName : (_)=> HomePage(),
         SettingsScreen.routeName : (_)=> SettingsScreen(),
+        NewsDetailsScreen.routeName : (_)=> NewsDetailsScreen(),
+        SearchPage.routeName : (_)=> SearchPage(),
       },
     );
   }

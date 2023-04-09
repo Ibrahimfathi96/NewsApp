@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news/Core/View/custom_widgets/category_list_widget.dart';
 import 'package:news/Core/View/custom_widgets/lang_bottom_sheet.dart';
 import 'package:news/Core/View/models/category_model.dart';
+import 'package:news/Core/View/screens/search_screen.dart';
 import 'package:news/Core/style/theme.dart';
 import 'package:news/Providers/lang_provider.dart';
 import 'package:provider/provider.dart';
@@ -67,7 +68,20 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         Scaffold(
+          backgroundColor: Colors.transparent,
             appBar: AppBar(
+              actions:
+              [
+                if(selectedCategory != null)
+                  Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, SearchPage.routeName);
+                      },
+                      icon: const Icon(Icons.search_outlined,size: 28,)),
+                )
+              ],
               title: Text(
                 selectedCategory == null
                     ? AppLocalizations.of(context)!.app_title
