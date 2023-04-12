@@ -199,7 +199,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-            ) : CategoryWidget(selectedCategory!),
+            )
+                : CategoryWidget(selectedCategory!),
         ),
       ],
     );

@@ -1,68 +1,84 @@
 import 'package:flutter/material.dart';
-import 'package:news/Core/API/api_manager.dart';
-import 'package:news/Core/API/models/SourcesResponse.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/Core/model/category_model.dart';
+import 'package:news/Core/style/dialog%20utils.dart';
+import 'package:news/Core/style/theme.dart';
 import 'package:news/View/Category/category_tabs_widget.dart';
+import 'package:news/View/Category/category_view_model.dart';
 
-class CategoryWidget extends StatelessWidget {
+class CategoryWidget extends StatefulWidget {
   CategoryMD selectedCategory;
+
   CategoryWidget(this.selectedCategory);
 
+  @override
+  State<CategoryWidget> createState() => _CategoryWidgetState();
+}
+
+class _CategoryWidgetState extends State<CategoryWidget> {
+  @override
+  void initState() {
+    super.initState();
+    viewModel.loadSources(widget.selectedCategory.categoryID);
+  }
+  CategoryViewModel viewModel = CategoryViewModel();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: FutureBuilder<SourcesResponse>(
-        future: APIManager.getSources(selectedCategory.categoryID),
-        builder: (buildContext, snapshot){
-          if(snapshot.connectionState == ConnectionState.waiting){
-            return const Center(child: CircularProgressIndicator(),);
-          }
-          if(snapshot.hasError){
-            return Center(
-              child: Column(
+    return BlocProvider<CategoryViewModel>(
+      create: (context) => viewModel,
+      child: Container(
+        child: BlocConsumer<CategoryViewModel, CategoryInitialState>(
+          listener: (context, state) {
+            if(state is MessageAction){
+              DialogUtils.showMessage(context, state.message);
+            }else if(state is NavigateToScreenAction){
+              Navigator.pushNamed(context, state.routeName);
+            }
+          },
+          ///return true or false to determine whether or not
+          ///to invoke listener with the state or buildWhen to rebuild
+          listenWhen:(previous, current) {
+            if(current is MessageAction||current is NavigateToScreenAction){
+              return true;
+            } return false;
+          },
+          buildWhen: (previous, current) {
+            if(current is MessageAction){
+              return false;
+            }return true;
+          },
+          builder: (context, state) {
+            if (state is LoadingState) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: MyTheme.green,
+                ),
+              );
+            } else if (state is SourcesLoadedState) {
+              return CategoryTabsWidget(state.sources);
+            } else if (state is ErrorState) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const CircularProgressIndicator(),
-                  const SizedBox(height: 20,),
-                  Text(
-                      textAlign: TextAlign.center,
-                      'Error Loading Data,Check Your Connection\n${snapshot.error.toString()}',
-                    style:Theme.of(context)
-                        .textTheme
-                        .headlineLarge!
-                        .copyWith(color: Colors.black87, fontWeight: FontWeight.w300)
+                  Text(state.errorMessage),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: MyTheme.green),
+                    onPressed: () {
+                      viewModel.loadSources(widget.selectedCategory.categoryID);
+                    },
+                    child: const Text('try again'),
                   ),
                 ],
-              ),
-            );
-          }
-          if(snapshot.data!.status == 'error'){
-            return Center(child:Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CircularProgressIndicator(),
-                const SizedBox(height: 20,),
-                Text(
-                    textAlign: TextAlign.center,
-                    'Server Error Loading data${snapshot.data?.message}',
-                    style:Theme.of(context)
-                        .textTheme
-                        .headlineLarge!
-                        .copyWith(color: Colors.black87, fontWeight: FontWeight.w300)
-                ),
-              ],
-            ) ,);
-          }
-          var sources = snapshot.data?.sources;
-          return CategoryTabsWidget(sources!);
-          //   ListView.builder(
-          //   itemBuilder: (context, index) => Text('${sources?[index].name}'),
-          //   itemCount: sources?.length ?? 0 ,
-          // );
-        },
+              );
+            } else {
+              return Container();
+            }
+          },
+        ),
       ),
-
     );
   }
 }
