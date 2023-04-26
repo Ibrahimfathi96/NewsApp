@@ -1,16 +1,14 @@
-# news
+News Application
 
-A new Flutter project.
+Link For the Application: 
+(Video): https://drive.google.com/file/d/19CFIJvSwojWJ5l6PVw0e1mCrFhpv_dgT/view?usp=share_link
 
-## Getting Started
+(Photos): https://drive.google.com/drive/folders/18zYpLuiOYfX_wLmCW-puDS6GUk_R2eoK?usp=share_link
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+News App is Completely Finished. The app consists mainly of 6 different News Categories and sidebar for back to categories and change app language.
+every category has multipale sources to display the news according to the main source.
+you can see the news brief and also can go to see the full article.
+you can search for specific topic or news.
+I used News Api and localizations package, Provider and bloc each has its own implementation 
+practiced later on mvvm with provider and also with bloc
+**Note: check all the repo's branched for full updated code and take a look at the app demo.
